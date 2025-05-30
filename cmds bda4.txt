@@ -1,0 +1,21 @@
+start-all.cmd
+
+jps
+
+hdfs dfs -ls /
+
+hdfs dfs -mkdir /bda4
+
+hdfs dfs -ls /
+
+hdfs dfs -copyFromLocal C:/Users/Sunil/Desktop/b3/movies.csv C:/Users/Sunil/Desktop/b3/tags.csv /bda4
+
+javac -classpath C:\hadoop\share\hadoop\common\*;C:\hadoop\share\hadoop\mapreduce\*;C:\hadoop\share\hadoop\hdfs\*;C:\hadoop\share\hadoop\common\lib\* -d C:/Users/Sunil/Desktop/b3 C:/Users/Sunil/Desktop/b3/MovieTagsJoin.java
+
+jar -cvf C:/Users/Sunil/Desktop/b3/MovieTagsJoin.jar -C C:/Users/Sunil/Desktop/b3 .
+
+hadoop jar C:/Users/Sunil/Desktop/b3/MovieTagsJoin.jar MovieTagsJoin /bda4/movies.csv /bda4/tags.csv /movies_output
+
+hdfs dfs -ls /movies_output
+
+hdfs dfs -cat /movies_output/part-r-00000

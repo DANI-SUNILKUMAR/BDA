@@ -1,0 +1,21 @@
+start-all.cmd
+
+jps
+
+hdfs dfs -ls /
+
+hdfs dfs -mkdir /bda3
+
+hdfs dfs -ls /
+
+hdfs dfs -copyFromLocal C:/Users/Sunil/Desktop/b2/Weather.csv /bda3
+
+javac -classpath C:\hadoop\share\hadoop\common\*;C:\hadoop\share\hadoop\mapreduce\*;C:\hadoop\share\hadoop\hdfs\*;C:\hadoop\share\hadoop\common\lib\* -d C:/Users/Sunil/Desktop/b2 C:/Users/Sunil/Desktop/b2/WeatherDataProcessor.java
+
+jar -cvf C:/Users/Sunil/Desktop/b2/WeatherDataProcessor.jar -C C:/Users/Sunil/Desktop/b2 .
+
+hadoop jar C:/Users/Sunil/Desktop/b2/WeatherDataProcessor.jar WeatherDataProcessor /bda3/Weather.csv  /Weather_output
+
+hdfs dfs -ls /Weather_output
+
+hdfs dfs -cat /Weather_output/part-r-00000

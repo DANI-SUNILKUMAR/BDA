@@ -1,0 +1,27 @@
+start-all.cmd
+
+jps
+
+hdfs dfs -ls /
+
+hdfs dfs -mkdir /bda2
+
+hdfs dfs -ls /
+
+hdfs dfs -copyFromLocal C:/Users/Sunil/Desktop/BDA/matrix.txt /bda2
+
+hdfs dfs -ls /bda2
+
+hdfs dfs -cat /bda2/matrix.txt
+
+javac -classpath C:\hadoop\share\hadoop\common\*;C:\hadoop\share\hadoop\common\lib\*;C:\hadoop\share\hadoop\hdfs\*;C:\hadoop\share\hadoop\mapreduce\* -d C:\Users\Sunil\Desktop\a C:\Users\Sunil\Desktop\a\MatrixMultiplication.java
+
+jar -cvf C:\Users\Sunil\Desktop\a\MatrixMultiplication.jar -C C:\Users\Sunil\Desktop\a .
+
+hadoop jar C:\Users\Sunil\Desktop\a\MatrixMultiplication.jar MatrixMultiplication /bda2/matrix.txt /matrix_output
+
+hdfs dfs -ls /
+
+hdfs dfs -ls /matrix_output
+
+hdfs dfs -cat /matrix_output/part-r-00000
